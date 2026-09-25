@@ -6,9 +6,13 @@ const healthRouter: Router = Router();
  * Health check response shape
  */
 interface HealthCheckResponse {
+    /** Overall health status of the server */
     status: string;
+    /** Seconds the process has been running */
     uptime: number;
+    /** ISO timestamp of when the check ran */
     timestamp: string;
+    /** Application version string */
     version: string;
 }
 

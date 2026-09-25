@@ -2,10 +2,15 @@
  * Result of a portfolio performance calculation
  */
 export interface PortfolioPerformance {
+    /** Amount originally invested */
     initialInvestment: number;
+    /** Current portfolio value */
     currentValue: number;
+    /** Difference between current value and initial investment */
     profitOrLoss: number;
+    /** Profit or loss as a percent of the initial investment */
     percentageChange: number;
+    /** Human readable summary of performance */
     performanceSummary: string;
 }
 

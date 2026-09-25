@@ -62,14 +62,18 @@ export const calculatePortfolioPerformance = (
     initialInvestment: number,
     currentValue: number
 ): PortfolioPerformance => {
+    // Negative value means a loss
     const profitOrLoss: number = currentValue - initialInvestment;
+    // Compare against the original amount to get a percent
     const percentageChange: number = (profitOrLoss / initialInvestment) * 100;
 
+    // First matching threshold wins
     const matchedThreshold: PerformanceThreshold | undefined =
         performanceThresholds.find((threshold: PerformanceThreshold) =>
             threshold.matches(percentageChange)
         );
 
+    // Fallback if somehow nothing matched
     const performanceSummary: string =
         matchedThreshold?.summary ??
         "Significant loss. Review your portfolio strategy.";

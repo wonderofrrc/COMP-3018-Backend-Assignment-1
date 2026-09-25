@@ -3,6 +3,9 @@ import app from "../src/app";
 
 describe("GET /api/v1/portfolio/performance", () => {
     it("should return portfolio performance for valid query params", async () => {
+        // Arrange
+        // (no setup needed — app is already imported)
+
         // Act
         const response: Response = await request(app).get(
             "/api/v1/portfolio/performance?initialInvestment=10000&currentValue=16000"

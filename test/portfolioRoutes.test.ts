@@ -4,7 +4,7 @@ import app from "../src/app";
 describe("GET /api/v1/portfolio/performance", () => {
     it("should return portfolio performance for valid query params", async () => {
         // Arrange
-        // (no setup needed — app is already imported)
+        // (no setup needed, app is already imported)
 
         // Act
         const response: Response = await request(app).get(
@@ -17,6 +17,24 @@ describe("GET /api/v1/portfolio/performance", () => {
         expect(response.body.percentageChange).toBe(60);
         expect(response.body.performanceSummary).toBe(
             "Excellent performance! Your investments are doing great."
+        );
+    });
+
+    it("should return significant loss for a large drop in value", async () => {
+        // Arrange
+        // (no setup needed, app is already imported)
+
+        // Act
+        const response: Response = await request(app).get(
+            "/api/v1/portfolio/performance?initialInvestment=10000&currentValue=8000"
+        );
+
+        // Assert
+        expect(response.status).toBe(200);
+        expect(response.body.profitOrLoss).toBe(-2000);
+        expect(response.body.percentageChange).toBe(-20);
+        expect(response.body.performanceSummary).toBe(
+            "Significant loss. Review your portfolio strategy."
         );
     });
 });
